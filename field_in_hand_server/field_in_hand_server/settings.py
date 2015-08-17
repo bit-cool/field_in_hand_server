@@ -38,6 +38,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app',
+    'rest_framework',
+    'oauth2_provider',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -80,6 +82,29 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
+}
+
+
+# OAUTH2
+OAUTH2_PROVIDER = {
+    'ACCESS_TOKEN_EXPIRE_SECOND':31104000,
+    'AUTHORIZATION_CODE_EXPIRE_SECONDS':31104000,
+    'SCOPES':{'read': 'Read scope', 'write': 'Write scope', 'groups': 'Access to your groups'}
+}
+OAUTH_APPLICATION_NAME = 'field_in_hand'
+OAUTH2_GET_TOKEN_URL = 'http://localhost:8000/o/token/'
+OAUTH2_REVOKE_TOKEN_URL = 'http://localhost:8000/o/revoke_token/'
+
+
+# REST_FRAMEWORK
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+    ),
+    'DEFAULT_PARSER_CLASSES': (
+        'rest_framework.parsers.JSONParser',
+    ),
 }
 
 
