@@ -29,7 +29,7 @@ class Point(models.Model):
     strike = models.FloatField(verbose_name='走向')
     declination = models.FloatField(verbose_name='磁偏角')
     unitId = models.CharField(max_length=20)
-    timedate = models.DateTimeField(default=now(), editable=True, verbose_name='时间')
+    timedate = models.DateTimeField(default=now, editable=True, verbose_name='时间')
     notes = models.TextField(verbose_name='笔记')
     comments = models.TextField(verbose_name='评论')
     description = models.TextField(verbose_name='描述')
