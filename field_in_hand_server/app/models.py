@@ -1,46 +1,1 @@
-# coding=utf-8
-from django.db import models
-import uuid
-from django.utils.timezone import now
-from django.contrib.auth.models import User
-
-class Point(models.Model):
-    localityId = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    localityName = models.CharField(max_length=100)
-    dataId = models.UUIDField(default=uuid.uuid4, editable=False)
-    datatype = models.CharField(max_length=20)
-    name = models.CharField(max_length=50)
-    x = models.DecimalField(max_digits=20, decimal_places=10)
-    y = models.DecimalField(max_digits=20, decimal_places=10)
-    h = models.DecimalField(max_digits=20, decimal_places=10)
-    latitude = models.DecimalField(max_digits=20, decimal_places=10)
-    longitude = models.DecimalField(max_digits=20, decimal_places=10)
-    altitude = models.DecimalField(max_digits=20, decimal_places=10)
-    horiz_precision = models.DecimalField(max_digits=20, decimal_places=10)
-    vert_precision = models.DecimalField(max_digits=20, decimal_places=10)
-    distanceNS = models.DecimalField(max_digits=20, decimal_places=10)
-    distanceEW = models.DecimalField(max_digits=20, decimal_places=10)
-    planeType = models.CharField(max_length=20)
-    dip = models.FloatField()
-    dipAzimuth = models.FloatField()
-    speed = models.FloatField()
-    plunge = models.CharField(max_length=20)
-    plungeAzimuth = models.CharField(max_length=20)
-    strike = models.FloatField()
-    declination = models.FloatField()
-    unitId = models.CharField(max_length=20)
-    timedate = models.DateTimeField(default=now(), editable=True)
-    notes = models.TextField()
-    comments = models.TextField()
-    description = models.TextField()
-
-    def __unicode__(self):
-        return self.localityId
-
-class AppUser(User):
-    uuid = models.UUIDField(default=uuid.uuid4, editable=False)
-    usertype = models.CharField(max_length=20)
-    databaseSize = models.IntegerField()
-    language = models.CharField(max_length=20)
-    vectorgraphNumber = models.IntegerField()
-# Create your models here.
+# coding=utf-8from django.db import modelsimport uuidfrom django.utils.timezone import nowfrom django.contrib.auth.models import Userclass Point(models.Model):    localityId = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)    localityName = models.CharField(max_length=100)    dataId = models.UUIDField(default=uuid.uuid4, editable=False)    datatype = models.CharField(max_length=20)    name = models.CharField(max_length=50)    x = models.DecimalField(max_digits=20, decimal_places=10)    y = models.DecimalField(max_digits=20, decimal_places=10)    h = models.DecimalField(max_digits=20, decimal_places=10)    latitude = models.DecimalField(max_digits=20, decimal_places=10, verbose_name='纬度')    longitude = models.DecimalField(max_digits=20, decimal_places=10, verbose_name='经度')    altitude = models.DecimalField(max_digits=20, decimal_places=10, verbose_name='高程')    horiz_precision = models.DecimalField(max_digits=20, decimal_places=10, verbose_name='水平精确度')    vert_precision = models.DecimalField(max_digits=20, decimal_places=10, verbose_name='垂直精确度')    distanceNS = models.DecimalField(max_digits=20, decimal_places=10)    distanceEW = models.DecimalField(max_digits=20, decimal_places=10)    planeType = models.CharField(max_length=20)    dip = models.FloatField(verbose_name='倾角')    dipAzimuth = models.FloatField(verbose_name='倾向')    speed = models.FloatField(verbose_name='速度')    plunge = models.CharField(max_length=20)    plungeAzimuth = models.CharField(max_length=20)    strike = models.FloatField(verbose_name='走向')    declination = models.FloatField(verbose_name='磁偏角')    unitId = models.CharField(max_length=20)    timedate = models.DateTimeField(default=now(), editable=True, verbose_name='时间')    notes = models.TextField(verbose_name='笔记')    comments = models.TextField(verbose_name='评论')    description = models.TextField(verbose_name='描述')    def __unicode__(self):        return self.localityIdclass AppUser(User):    uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)    usertype = models.CharField(max_length=20)    databaseSize = models.IntegerField()    language = models.CharField(max_length=20)    vectorgraphNumber = models.IntegerField()    def __unicode__(self):        return self.uuid# Create your models here.
