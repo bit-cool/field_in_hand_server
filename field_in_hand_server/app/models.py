@@ -22,7 +22,7 @@ class Point(models.Model):
     distanceEW = models.DecimalField(max_digits=20, decimal_places=10)
     planeType = models.CharField(max_length=20)
     dip = models.FloatField()
-    dipAzumuth = models.FloatField()
+    dipAzimuth = models.FloatField()
     speed = models.FloatField()
     plunge = models.CharField(max_length=20)
     plungeAzimuth = models.CharField(max_length=20)
