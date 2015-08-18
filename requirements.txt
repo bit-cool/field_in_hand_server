@@ -2,3 +2,4 @@ django
 django-oauth-toolkit
 djangorestframework
 rest-condition
+uwsgi
