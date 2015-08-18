@@ -84,6 +84,15 @@ TEMPLATES = [
 WSGI_APPLICATION = 'field_in_hand_server.wsgi.application'
 
 
+# MEMCACHE
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1:11211',
+    }
+}
+
+
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
