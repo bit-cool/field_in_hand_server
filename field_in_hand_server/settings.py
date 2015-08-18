@@ -28,6 +28,16 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+# Email settings
+EMAIL_HOST = 'smtp.163.com'
+EMAIL_PORT = 25
+EMAIL_HOST_USER = 'justtempuse@163.com'
+EMAIL_HOST_PASSWORD = 'a123456789'
+EMAIL_SUBJECT_PREFIX = '[FieldInHand]'
+EMAIL_USE_TLS = False
+SERVER_EMAIL = 'justtempuse@163.com'
+
+
 # Application definition
 
 INSTALLED_APPS = (
