@@ -29,7 +29,7 @@ class Point(models.Model):
     strike = models.FloatField(verbose_name='走向')
     declination = models.FloatField(verbose_name='磁偏角')
     unitId = models.UUIDField(default=uuid.uuid4, editable=False)
-    timedate = models.DateTimeField(default=now, editable=True, verbose_name='时间')
+    timedate = models.DateTimeField(auto_now_add=True)
     notes = models.TextField(verbose_name='笔记')
     comments = models.TextField(verbose_name='评论')
     description = models.TextField(verbose_name='描述')
@@ -37,8 +37,9 @@ class Point(models.Model):
     def __unicode__(self):
         return self.localityId
 
-class AppUser(User):
+class AppUser(models.Model):
     uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    user = models.OneToOneField(User)
     usertype = models.CharField(max_length=20)
     databaseSize = models.IntegerField()
     language = models.CharField(max_length=20)
