@@ -77,24 +77,24 @@ WSGI_APPLICATION = 'field_in_hand_server.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'field_in_hand',
-#         'USER': 'root',
-#         'PASSWORD': 'Bitcool@2015',
-#         'HOST': '139.162.25.140',
-#         'PORT': 3306,
-#         'OPTIONS': {'charset':'utf8mb4'},
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'field_in_hand',
+        'USER': 'root',
+        'PASSWORD': 'Bitcool@2015',
+        'HOST': '139.162.25.140',
+        'PORT': 3306,
+        'OPTIONS': {'charset':'utf8mb4'},
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
 # OAUTH2
 OAUTH2_PROVIDER = {
     'ACCESS_TOKEN_EXPIRE_SECOND':31104000,
