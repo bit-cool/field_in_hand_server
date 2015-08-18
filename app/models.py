@@ -29,10 +29,12 @@ class Point(models.Model):
     strike = models.FloatField(verbose_name='走向')
     declination = models.FloatField(verbose_name='磁偏角')
     unitId = models.UUIDField(default=uuid.uuid1, editable=False)
-    timedate = models.DateTimeField(auto_now_add=True)
+    timedate = models.DateTimeField()
     notes = models.TextField(verbose_name='笔记')
     comments = models.TextField(verbose_name='评论')
     description = models.TextField(verbose_name='描述')
+    heading = models.CharField(max_length=20, blank=True)
+    image_name = models.CharField(max_length=20, blank=True)
 
     def __unicode__(self):
         return str(self.localityId)
