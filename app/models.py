@@ -5,9 +5,9 @@ from django.utils.timezone import now
 from django.contrib.auth.models import User
 
 class Point(models.Model):
-    localityId = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    localityId = models.UUIDField(primary_key=True, default=uuid.uuid1, editable=False)
     localityName = models.CharField(max_length=100)
-    dataId = models.UUIDField(default=uuid.uuid4, editable=False)
+    dataId = models.UUIDField(default=uuid.uuid1, editable=False)
     datatype = models.CharField(max_length=20)
     name = models.CharField(max_length=50)
     x = models.DecimalField(max_digits=20, decimal_places=10)
@@ -28,23 +28,24 @@ class Point(models.Model):
     plungeAzimuth = models.CharField(max_length=20)
     strike = models.FloatField(verbose_name='走向')
     declination = models.FloatField(verbose_name='磁偏角')
-    unitId = models.UUIDField(default=uuid.uuid4, editable=False)
+    unitId = models.UUIDField(default=uuid.uuid1, editable=False)
     timedate = models.DateTimeField(auto_now_add=True)
     notes = models.TextField(verbose_name='笔记')
     comments = models.TextField(verbose_name='评论')
     description = models.TextField(verbose_name='描述')
 
     def __unicode__(self):
-        return self.localityId
+        return str(self.localityId)
+
 
 class AppUser(models.Model):
-    uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    uuid = models.UUIDField(primary_key=True, default=uuid.uuid1, editable=False)
     user = models.OneToOneField(User)
-    usertype = models.CharField(max_length=20)
-    databaseSize = models.IntegerField()
-    language = models.CharField(max_length=20)
-    vectorgraphNumber = models.IntegerField()
+    usertype = models.CharField(max_length=20, blank=True)
+    databaseSize = models.IntegerField(default=0)
+    language = models.CharField(max_length=20, blank=True)
+    vectorgraphNumber = models.IntegerField(default=0)
 
     def __unicode__(self):
-        return self.uuid
+        return str(self.uuid)
 # Create your models here.
