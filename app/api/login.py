@@ -12,8 +12,8 @@ from oauth2_provider.models import Application
 class Login(APIView):
 
     def post(self, request, format=None):
-        username = request.DATA['username']
-        password = request.DATA['password']
+        username = request.data['username']
+        password = request.data['password']
         user = authenticate(username=username, password=password)
         if user and user.is_active:
             app = settings.OAUTH_APPLICATION_NAME

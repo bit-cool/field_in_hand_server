@@ -13,7 +13,7 @@ class SendMail(APIView):
         code = random.randint(1000, 9999)
         subject = 'FieldInHand邮箱验证'
         from_email = 'justtempuse@163.com'
-        to = request.DATA['email']
+        to = request.data['email']
         text_content = '您的验证码是%s,请在30分钟内完成验证！'%code
 
         try:
@@ -26,8 +26,8 @@ class SendMail(APIView):
 
 class CheckCode(APIView):
     def post(self, request, format=None):
-        email = request.DATA['email']
-        code = request.DATA['code']
+        email = request.data['email']
+        code = request.data['code']
         code1 = cache.get(email+'code')
         if code1 is None:
             return Response(status=status.HTTP_404_NOT_FOUND)
