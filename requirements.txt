@@ -5,3 +5,4 @@ rest-condition
 uwsgi
 MySQL-python
 requests
+python-memcached
