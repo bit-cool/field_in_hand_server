@@ -6,6 +6,8 @@ from rest_framework.response import Response
 import random
 from django.core.mail import send_mail
 from django.core.cache import cache
+from app.models import User, AppUser
+import datetime
 
 
 class SendMail(APIView):
@@ -34,3 +36,20 @@ class CheckCode(APIView):
         if int(code1) != int(code):
             return Response(status=status.HTTP_404_NOT_FOUND)
         return Response(status=status.HTTP_200_OK)
+
+
+class Register(APIView):
+    def post(self, requests, format=None):
+        username = requests.data['username']
+        password = requests.data['password']
+        try:
+            user = User.objects.get(username=username)
+            return Response(status=status.HTTP_403_FORBIDDEN)
+        except:
+            user = User.objects.create_user(username=username, password=password,
+                                            last_login=datetime.datetime.now(), email=username)
+            user.save()
+            appuser = AppUser()
+            appuser.user = user
+            appuser.save()
+            return Response(status=status.HTTP_201_CREATED)
