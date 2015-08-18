@@ -11,7 +11,7 @@ import os
 import sys
 reload(sys)
 sys.setdefaultencoding('utf8')
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "doco.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "field_in_hand_server.settings")
 
 from django.core.wsgi import get_wsgi_application
 
