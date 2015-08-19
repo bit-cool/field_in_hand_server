@@ -5,6 +5,22 @@ from django.utils.timezone import now
 from django.contrib.auth.models import User
 
 
+class Locality(models.Model):
+    localityId = models.UUIDField(primary_key=True, default=uuid.uuid1, editable=False)
+    localityName = models.CharField(max_length=100)
+
+    def __unicode__(self):
+        return self.localityName
+
+
+class Unit(models.Model):
+    unitId = models.UUIDField(primary_key=True, default=uuid.uuid1, editable=False)
+    unit = models.CharField(max_length=50)
+
+    def __unicode__(self):
+        return self.unit
+
+
 class Data(models.Model):
     dataId = models.UUIDField(primary_key=True, default=uuid.uuid1, editable=False)
     datatype = models.CharField(max_length=20)
@@ -33,27 +49,11 @@ class Data(models.Model):
     description = models.TextField(verbose_name='描述')
     heading = models.CharField(max_length=20, blank=True)
     image_name = models.CharField(max_length=20, blank=True)
+    locality = models.ForeignKey(Locality, related_name='data')
+    unit = models.ForeignKey(Unit, related_name='data')
 
     def __unicode__(self):
         return str(self.localityId)
-
-
-class Locality(models.Model):
-    localityId = models.UUIDField(primary_key=True, default=uuid.uuid1, editable=False)
-    localityName = models.CharField(max_length=100)
-    data = models.ForeignKey(Data, related_name='locality')
-
-    def __unicode__(self):
-        return self.localityName
-
-
-class Unit(models.Model):
-    unitId = models.UUIDField(primary_key=True, default=uuid.uuid1, editable=False)
-    unit = models.CharField(max_length=50)
-    data = models.ForeignKey(Data, related_name='unit')
-
-    def __unicode__(self):
-        return self.unit
 
 
 class AppUser(models.Model):
