@@ -8,13 +8,14 @@ from django.core.mail import send_mail
 from django.core.cache import cache
 from app.models import User, AppUser
 import datetime
+from field_in_hand_server import settings
 
 
 class SendMail(APIView):
     def post(self, request, format=None):
         code = random.randint(1000, 9999)
         subject = 'FieldInHand邮箱验证'
-        from_email = 'justtempuse@163.com'
+        from_email = settings.EMAIL_HOST_USER
         to = request.data['email']
         text_content = '您的验证码是%s,请在30分钟内完成验证！'%code
 
