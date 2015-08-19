@@ -1,1 +1,1 @@
-from django.contrib import adminfrom models import AppUser, Pointadmin.site.register(Point)admin.site.register(AppUser)# Register your models here.
+from django.contrib import adminfrom models import AppUser, Data, Unit, Localityadmin.site.register(Data)admin.site.register(Unit)admin.site.register(Locality)admin.site.register(AppUser)# Register your models here.

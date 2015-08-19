@@ -4,10 +4,9 @@ import uuid
 from django.utils.timezone import now
 from django.contrib.auth.models import User
 
-class Point(models.Model):
-    localityId = models.UUIDField(primary_key=True, default=uuid.uuid1, editable=False)
-    localityName = models.CharField(max_length=100)
-    dataId = models.UUIDField(default=uuid.uuid1, editable=False)
+
+class Data(models.Model):
+    dataId = models.UUIDField(primary_key=True, default=uuid.uuid1, editable=False)
     datatype = models.CharField(max_length=20)
     name = models.CharField(max_length=50)
     x = models.DecimalField(max_digits=20, decimal_places=10)
@@ -28,7 +27,6 @@ class Point(models.Model):
     plungeAzimuth = models.CharField(max_length=20)
     strike = models.FloatField(verbose_name='走向')
     declination = models.FloatField(verbose_name='磁偏角')
-    unitId = models.UUIDField(default=uuid.uuid1, editable=False)
     timedate = models.DateTimeField()
     notes = models.TextField(verbose_name='笔记')
     comments = models.TextField(verbose_name='评论')
@@ -38,6 +36,24 @@ class Point(models.Model):
 
     def __unicode__(self):
         return str(self.localityId)
+
+
+class Locality(models.Model):
+    localityId = models.UUIDField(primary_key=True, default=uuid.uuid1, editable=False)
+    localityName = models.CharField(max_length=100)
+    data = models.ForeignKey(Data, related_name='locality')
+
+    def __unicode__(self):
+        return self.localityName
+
+
+class Unit(models.Model):
+    unitId = models.UUIDField(primary_key=True, default=uuid.uuid1, editable=False)
+    unit = models.CharField(max_length=50)
+    data = models.ForeignKey(Data, related_name='unit')
+
+    def __unicode__(self):
+        return self.unit
 
 
 class AppUser(models.Model):
@@ -50,4 +66,3 @@ class AppUser(models.Model):
 
     def __unicode__(self):
         return str(self.uuid)
-# Create your models here.
